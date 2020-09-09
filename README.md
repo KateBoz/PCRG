@@ -1,2 +1,1 @@
-# PCRG
-Pacific Northwest Crab Research Group
+# PCRG - Pacific Northwest Crab Research Group
