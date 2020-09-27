@@ -32,6 +32,9 @@ counts_allDone <- data.frame(do.call(rbind, countsList))
 colnames(counts_allDone)[1] <- "date"
 counts_split <- split(counts_allDone, counts_allDone$Organization)
 
+#Added by KB to export the data for plotting
+write.csv(counts_allDone,"output/compiled_2019_count_data.csv")
+
 
 ###CRAB MEASUREMENTS
 # getting crab measurements from second sheet of excel files
@@ -44,6 +47,10 @@ measure_allDone <- data.frame(do.call(rbind, measureList))
 # getting rid of lines where all 3 measurements are NA
 # blank lines erroneously read in
 measure_allDone <- measure_allDone[!(is.na(measure_allDone$CW) & is.na(measure_allDone$CH & is.na(measure_allDone$TH))),]
+
+#Added by KB to export the size data for plotting
+write.csv(measure_allDone,"output/compiled_2019_measurement_data.csv")
+
 
 #making sure measurment columns are numerics
 ###### GRAPHING ###########
@@ -174,3 +181,4 @@ lightTrapTideGraph_scaler <- function(df, countsWithTides){
 plots <-lapply(counts_split, lightTrapTideGraph_scaler, countsWithTides)
 ggsave(paste("output/Light_Traps_2019_w_Tides", Sys.Date(), ".pdf", sep=""), 
        gridExtra::marrangeGrob(grobs = plots, nrow=4, ncol=1, top=NULL), width=8.5, height=11)
+
