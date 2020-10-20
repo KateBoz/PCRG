@@ -1,0 +1,17 @@
+Site_Code,Site_Name,Sampling_Star_Date,Sampling_End_Date,Latitude,Longitude,Site_type,Organization,Lead_Contact,Notes
+ANA,Fidalgo Bay - Anacortes,20190415,,48.510059,-122.604745,public dock,Swinomish Indian Tribal Community,Sarah Grossman & Claire Cook,
+ROS,Rosario Head,20180501,,48.416618,-122.663325,public dock,Swinomish Indian Tribal Community,Sarah Grossman & Claire Cook,
+COR,Cornet Bay,20180501,,48.400322,-122.625143,public dock,Swinomish Indian Tribal Community,Sarah Grossman & Claire Cook,
+OAK,Crescent Harbor,20190415,,48.28485,-122.622799,Navy dock,Swinomish Indian Tribal Community,Sarah Grossman & Claire Cook,
+PEN,Penn Cove,20190415,,48.22284,-122.687963,public dock,Swinomish Indian Tribal Community,Sarah Grossman & Claire Cook,
+ZIT,Zittels Marina ,20190422,,47.165366,-122.808021,Marina,Nisqually Tribe & DNR Aquatic Reserves & PSI,"Margaret Homerding, Katie Houle, Shannon Boldt, Allison Brownlee",
+SQR,Sequim Bay - Runstrom ,20190418,,48.037076,-123.019722,private dock,Jamestown S'Klallam Tribe,Liz Tobin & Neil Harrington,
+GAR,"Glenn Ayr Resort, Hood Canal",20190402,20190820,47.420556,-123.130105,private dock,Skokomish Tribe,"Blair Paul, Andy Pavone, Kevin Cagey",
+LOF,Lofall Community Dock,20190415,,47.815366,-122.655995,private dock,Port Gamble S'Klallam Tribe,Jason Haveman,
+SHI,Shilshole Marina,20190729,,47.686589,-122.404056,Marina,UW,Sean McDonald,
+TBM,Tulalip Bay Marina,20190415,,48.061757,-122.279217,Marina,Tulalip Tribe,Ciera Edison,
+HPD,Hales Pass Dock,20190415,,48.731217,-122.6694,private dock,Lummi Nation,Nick Jefferson,Note: these traps are not the standardized Shanks design and cannot be used in the larger State-wide study. The data will still be informative for pres/abs data however.
+CLM,Chinook Landing Marina,20160601,,47.2804,-122.4012,Marina,Puyallup Tribe,George Stearns,Note: these traps are not the standardized Shanks design and cannot be used in the larger State-wide study. The data will still be informative for pres/abs data however.
+APS,Agate Pass South - Kiana Lodge,20190415,,47.70186,-122.581108,private dock,Suquamish Tribe,Elizabeth Unsell,
+MUK,Northwest Fisheries Science Center - Mukilteo Research Station,20190510,,47.950137,-122.302385,private pier,NOAA NWFSC,Paul McElhany and Kate Rovinski,
+MCR,Clam Bay - Manchester Research Station,20190621,,47.57377,-122.545308,private dock,Puget Sound Restoration Fund,Ryan Crim,
