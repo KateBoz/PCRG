@@ -37,8 +37,11 @@ c.data<-read.csv("C:\\Users\\boskm477\\Desktop\\Light_Trap\\PCRG Data\\PCRG Data
 
 #create table
 site.table<-c.data%>%distinct(Site,Organization)
+tmb<-data.frame(Site="TBM", Organization = "Tulalip")
+site.table<-rbind(site.table,tmb)
 
-m.data<-read.csv("C:\\Users\\boskm477\\Desktop\\Light_Trap\\PCRG Data\\PCRG Data\\output\\compiled_2019_measurement_data.csv")
+
+m.data<-read.csv("C:\\Users\\boskm477\\Desktop\\Light_Trap\\PCRG Data\\PCRG Data\\output\\compiled_2019_measurement_data_wTulalip.csv")
 m.data<-m.data[,-1]
 
 #add the Organization name to the measurement data
@@ -49,6 +52,7 @@ m.data<-left_join(m.data,site.table)
 
 #need to standardize the stage catagory names and cleaning the data
 unique(m.data$Stage)
+unique(m.data$Organization)
 
 m.data$Stage[which(m.data$Stage=="megalopae")]="Megalopae"
 m.data$Stage[which(m.data$Stage=="instar")]="Instar"
@@ -60,7 +64,7 @@ m.data<-m.data[-which(is.na(m.data$Date)),] #remove na rows for Date
 #adjust the class of df cols
 sapply(m.data,class)
 
-m.data$Date<-as.Date(m.data$Date)
+m.data$Date<-as.Date(m.data$Date,format = "%m/%d/%Y")
 m.data$Site<-as.factor(m.data$Site)
 m.data$CW<-as.numeric(m.data$CW)
 m.data$CH<-as.numeric(m.data$CH)
@@ -100,7 +104,7 @@ all.data.hist<-ggplot(m.data, aes(x=CW))+
   my_theme+
   ylab("Count")+
   xlab("Carapace Width (mm)")+
-  ggtitle("Size Distribution of Megalopae and J1 Instars from 2019")+
+  ggtitle("Size Distribution of 2019 Megalopae and J1 Instars by Month")+
   geom_vline(dat=means.table,aes(xintercept=mean, col=Stage),lwd=1, alpha = 0.6)+
   scale_fill_manual(values=c("limegreen","grey90"))+
   scale_color_manual(values=c("grey10","red"))+
@@ -108,7 +112,24 @@ all.data.hist<-ggplot(m.data, aes(x=CW))+
 
 all.data.hist
 
-ggsave(paste("all_data_hist_", Sys.Date(), ".pdf", sep=""))
+ggsave(paste("all_data_hist_", Sys.Date(), ".png", sep=""))
+
+
+
+#plot of all the data
+all.data.density<-ggplot(subset(m.data,Stage == "Megalopae"), aes(x=Date))+
+  #geom_histogram(aes(fill=Stage),col="grey22")+
+  geom_density(aes(fill=Stage))+
+  my_theme+
+  ylab("Count")+
+  xlab("Date")+
+  ggtitle("# of megalopae measured by date")+
+  scale_fill_manual(values=c("grey80"))
+
+all.data.density
+
+ggsave(paste("all_data_density_", Sys.Date(), ".png", sep=""))
+
 
 
 #Statistical models
@@ -118,6 +139,10 @@ lm1<-aov(mega$CW~factor(mega$Month))
 summary(lm1)
 TukeyHSD(lm1)
 
+lm1.1<-aov(mega$CW~mega$Organization)
+summary(lm1.1)
+TukeyHSD(lm1.1)
+
 
 instar<-subset(m.data,Stage=="Instar")
 
@@ -126,7 +151,10 @@ summary(lm2)
 TukeyHSD(lm2)
 
 
+
 #Scatterplot by Date
+#m.data$Stage<-relevel(m.data$Stage,ref = "Megalopae")
+
 
 #line
 all.data.line<-ggplot(m.data, aes(x=Date,y=CW,group=Stage))+
@@ -135,17 +163,19 @@ all.data.line<-ggplot(m.data, aes(x=Date,y=CW,group=Stage))+
   my_theme+
   xlab("Date")+
   ylab("Carapace Width (mm)")+
+  ggtitle("Size Distribution of 2019 Megalopae and J1 Instars by Location")+
   scale_color_manual(values=c("limegreen","grey30"))+
   facet_grid(Organization~.)
 
 all.data.line
-ggsave(paste("all_data_line_", Sys.Date(), ".pdf", sep=""))
+ggsave(paste("all_data_line_", Sys.Date(), ".png", sep=""))
 
 
 #statistical model
 
 lm3<-lm(mega$CW~mega$Date*mega$Organization)
 summary(lm3)
+anova(lm3)
 
 #looking at the lenght/height
 
@@ -153,15 +183,14 @@ all.data.line2<-ggplot(m.data, aes(x=CW,y=CH,group=Organization))+
   geom_point(aes(col=Organization),alpha = 0.3,size=2.5)+
   stat_smooth(aes(col=Organization),method="lm",se=F, alpha = 0.3)+
   my_theme+
+  ggtitle("Carapace Width to Length Relationship by Location")+
   ylab("Carapace Height (mm)")+
   xlab("Carapace Width (mm)")+
   facet_grid(Stage~.)
 
 all.data.line2
 
-ggsave(paste("carapace_width_height_", Sys.Date(), ".pdf", sep=""))
-
-
+ggsave(paste("carapace_width_height_", Sys.Date(), ".png", sep=""))
 
 
 
